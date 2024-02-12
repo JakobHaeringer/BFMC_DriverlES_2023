@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+SIMULATOR_FLAG=ITMOVES_SIMULATOR
+
+cd /root/BFMC/Pi_Platform
+# Create our catkin workspace.
+catkin init
+# Set a custom define to let C/C++ code know it's running inside the simulator.
+catkin config --cmake-args -D${SIMULATOR_FLAG}=1 -DCMAKE_C_FLAGS=-D${SIMULATOR_FLAG}=1 -DCMAKE_CXX_FLAGS=-D${SIMULATOR_FLAG}=1

@@ -1,0 +1,37 @@
+{
+    "build": {
+        "context": "..",
+        "dockerfile": "dockerfile",
+        "target": "dev_stage"
+    },
+    "forwardPorts": [
+        10000
+    ],
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/root/BFMC,type=bind"
+    ],
+    "postStartCommand": "${containerWorkspaceFolder}/.devcontainer/post_start_command",
+    "workspaceFolder": "/root/BFMC",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Python extensions.
+                "njpwerner.autodocstring",
+                "ms-python.python",
+                "ms-python.isort",
+                "ms-python.autopep8",
+                // C++ extensions.
+                "ms-vscode.cpptools-extension-pack",
+                "jeff-hykin.better-cpp-syntax",
+                "josetr.cmake-language-support-vscode",
+                "cschlosser.doxdocgen",
+                // Git extensions
+                "eamodio.gitlens"
+            ]
+        }
+    },
+    "runArgs": [
+        "--gpus",
+        "all"
+    ]
+}

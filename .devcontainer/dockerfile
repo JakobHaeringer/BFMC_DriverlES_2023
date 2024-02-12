@@ -1,0 +1,211 @@
+#################################################################################################################################################################################################################
+# Install basic packages.                                                                                                                                                                                           #
+#################################################################################################################################################################################################################
+FROM ros:noetic AS dev_stage
+
+# Use bash as shell.
+SHELL ["/bin/bash", "-c"]
+
+# Update/upgrade package list.
+RUN apt-get update && apt-get upgrade -y && \
+    # Install required packages for fetching and building dependencies.
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    jq \
+    cmake \
+    ninja-build \
+    unzip \
+    wget \
+    libeigen3-dev \
+    ros-noetic-rqt \
+    ros-noetic-rqt-common-plugins \
+    python-is-python3 \
+    python3-dev \
+    python3-pip && \
+    # Perform cleanup.
+    rm -rf "/var/lib/apt/lists/*" && \
+    # Install required python packages.
+    pip install \
+    catkin_tools \
+    onnx
+
+#################################################################################################################################################################################################################
+# Install Nvidia CUDA.                                                                                                                                                                                          #
+#################################################################################################################################################################################################################
+ARG CUDA_VERSION=11.8.0-1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gnupg2 \
+    ca-certificates && \
+    # Add the correct repository as a source for apt to fetch Nvidia CUDA packages from.
+    wget "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb" && \
+    dpkg -i "cuda-keyring_1.0-1_all.deb" && \
+    rm "cuda-keyring_1.0-1_all.deb" && \
+    # Perform cleanup.
+    rm -rf "/var/lib/apt/lists/*"
+
+# Install all packages. Whether all of them are required or not is another question...
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Dependencies below taken from https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/11.8.0/ubuntu2004/base/Dockerfile.
+    cuda-cudart-11-8=11.8.89-1 \
+    cuda-compat-11-8 \
+    # Dependencies below taken from https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/11.8.0/ubuntu2004/runtime/Dockerfile.
+    cuda-libraries-11-8=${CUDA_VERSION} \
+    libnpp-11-8=11.8.0.86-1 \
+    cuda-nvtx-11-8=11.8.86-1 \
+    libcusparse-11-8=11.7.5.86-1 \
+    libcublas-11-8=11.11.3.6-1 \
+    libnccl2=2.16.2-1+cuda11.8 \
+    # Dependencies below taken from https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/11.8.0/ubuntu2004/devel/Dockerfile.
+    libtinfo5 \
+    libncursesw5 \
+    cuda-cudart-dev-11-8=11.8.89-1 \
+    cuda-command-line-tools-11-8=${CUDA_VERSION} \
+    cuda-minimal-build-11-8=${CUDA_VERSION} \
+    cuda-libraries-dev-11-8=${CUDA_VERSION} \
+    cuda-nvml-dev-11-8=11.8.86-1 \
+    cuda-nvprof-11-8=11.8.87-1 \
+    libnpp-dev-11-8=11.8.0.86-1 \
+    libcusparse-dev-11-8=11.7.5.86-1 \
+    libcublas-dev-11-8=11.11.3.6-1 \
+    libnccl-dev=2.16.2-1+cuda11.8 \
+    # Dependencies below taken from https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/11.8.0/ubuntu2004/devel/cudnn8/Dockerfile.
+    libcudnn8=8.9.0.131-1+cuda11.8 \
+    libcudnn8-dev=8.9.0.131-1+cuda11.8 && \
+    # Perform cleanup.
+    rm -rf "/var/lib/apt/lists/*"
+
+# Keep apt from auto upgrading certain packages. See https://gitlab.com/nvidia/container-images/cuda/-/issues/88.
+RUN apt-mark hold libcublas-11-8 libcublas-dev-11-8 libnccl2 libnccl-dev libcudnn8
+
+ENV PATH "/usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}"
+ENV LD_LIBRARY_PATH "/usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}"
+ENV LIBRARY_PATH "/usr/local/cuda/lib64/stubs:${LIBRARY_PATH}"
+
+#################################################################################################################################################################################################################
+# Install Nvidia TensorRT.                                                                                                                                                                                      #
+#################################################################################################################################################################################################################
+ARG TENSORRT_VERSION=8.6.1.6-1+cuda11.8
+
+# Installation processed based on https://github.com/NVIDIA/TensorRT/blob/main/docker/ubuntu-20.04.Dockerfile.
+#
+# The following links were also be helpful:
+#     - https://github.com/NVIDIA/TensorRT/issues/1741
+#     - https://forums.developer.nvidia.com/t/tensorrt-8-0-installation/180498/14
+RUN apt-key adv --fetch-keys "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/3bf863cc.pub" && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    libnvinfer8=${TENSORRT_VERSION} \
+    libnvonnxparsers8=${TENSORRT_VERSION} \
+    libnvparsers8=${TENSORRT_VERSION} \
+    libnvinfer-plugin8=${TENSORRT_VERSION} \
+    libnvinfer-dev=${TENSORRT_VERSION} \
+    libnvonnxparsers-dev=${TENSORRT_VERSION} \
+    libnvparsers-dev=${TENSORRT_VERSION} \
+    libnvinfer-plugin-dev=${TENSORRT_VERSION} \
+    python3-libnvinfer=${TENSORRT_VERSION} \
+    libnvinfer-dispatch8=${TENSORRT_VERSION} \
+    libnvinfer-dispatch-dev=${TENSORRT_VERSION} \
+    libnvinfer-lean8=${TENSORRT_VERSION} \
+    libnvinfer-lean-dev=${TENSORRT_VERSION} \
+    libnvinfer-vc-plugin8=${TENSORRT_VERSION} \
+    libnvinfer-vc-plugin-dev=${TENSORRT_VERSION} \
+    libnvinfer-headers-dev=${TENSORRT_VERSION} \
+    libnvinfer-headers-plugin-dev=${TENSORRT_VERSION} && \
+    # Perform cleanup.
+    rm -rf "/var/lib/apt/lists/*"
+
+#################################################################################################################################################################################################################
+# Install OpenCV.                                                                                                                                                                                               #
+#################################################################################################################################################################################################################
+ARG OPENCV_VERSION=4.5.5
+ARG CUDA_ARCH_BIN="6.1,8.6,8.9"
+
+# Install OpenCV. See below links for more info:
+#     - https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html
+#     - https://github.com/JulianAssmann/opencv-cuda-docker/blob/master/ubuntu-20.04/opencv-4.5.3/cuda-11.4.1/Dockerfile
+#
+RUN cd "/opt" && \
+    # Download core OpenCV, unpack it and perform cleanup.
+    wget "https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip" && \
+    unzip "${OPENCV_VERSION}.zip" && \
+    rm "${OPENCV_VERSION}.zip" && \
+    # Download experimental OpenCV features, unpack them and perform cleanup.
+    wget "https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip" && \
+    unzip "${OPENCV_VERSION}.zip" && \
+    rm "${OPENCV_VERSION}.zip" && \
+    # Create build directory and switch to it.
+    mkdir "/opt/opencv-${OPENCV_VERSION}/build" && cd "/opt/opencv-${OPENCV_VERSION}/build" && \
+    # Configure CMake build process.
+    cmake \
+    -GNinja \
+    -DOPENCV_EXTRA_MODULES_PATH="/opt/opencv_contrib-${OPENCV_VERSION}/modules" \
+    -DCUDA_ARCH_BIN=${CUDA_ARCH_BIN} \
+    -DWITH_CUDA=ON \
+    -DWITH_CUDNN=ON \
+    -DCMAKE_BUILD_TYPE=RELEASE \
+    .. && \
+    # Build OpenCV.
+    cmake --build . -j$(($(nproc)/2)) && \
+    # Install OpenCV.
+    ninja install && ldconfig && \
+    # Remove sources and build folder.
+    rm -rf "/opt/opencv-${OPENCV_VERSION}" && rm -rf "/opt/opencv_contrib-${OPENCV_VERSION}"
+
+#################################################################################################################################################################################################################
+# Install YOLOv5-TensorRT (https://github.com/noahmr/yolov5-tensorrt/tree/main) used for camera image processing.                                                                                               #
+#################################################################################################################################################################################################################
+RUN cd "/opt" && \
+    # Download YOLOv5-TensorRT
+    wget "https://github.com/noahmr/yolov5-tensorrt/archive/refs/heads/main.zip" && \
+    unzip "main.zip" && \
+    rm "main.zip" && \
+    # Create build directory and switch to it.
+    mkdir "/opt/yolov5-tensorrt-main/build" && cd "/opt/yolov5-tensorrt-main/build" && \
+    # Configure CMake build process.
+    cmake \
+    -GNinja \
+    -DBUILD_PYTHON=OFF \
+    .. && \
+    # Build YOLOv5-TensorRT
+    cmake --build . -j$(($(nproc)/2)) && \
+    # Install YOLOv5-TensorRT.
+    ninja install && ldconfig && \
+    # Remove YOLOv5-TensorRT sources and build foler.
+    rm -rf "/opt/yolov5-tensorrt-main"
+
+#################################################################################################################################################################################################################
+# Setup ROS/catkin workspace.                                                                                                                                                                                   #
+#################################################################################################################################################################################################################
+
+# Declare catkin workspace directory for convenience.
+ENV CATKIN_WORKSPACE="/root/BFMC/Pi_Platform"
+
+# Switch PWD to our catkin workspace.
+WORKDIR "${CATKIN_WORKSPACE}"
+
+# Automatic sourcing of ROS distribution for interactive use of container.
+RUN echo "source /opt/ros/noetic/setup.bash" >> "/root/.bashrc" \
+    # Automatic sourcing of ROS catkin_ws for interactive use of container.
+    echo "source ${CATKIN_WORKSPACE}/devel/setup.bash" >> "/root/.bashrc"
+
+# Install additional packages that make your life easier while developing inside the container.
+# If you want to add new packages, append them here.
+RUN apt-get install -y --no-install-recommends \
+    git \
+    ros-noetic-plotjuggler-ros
+
+#################################################################################################################################################################################################################
+# Run ROS network.                                                                                                                                                                                              #
+#################################################################################################################################################################################################################
+FROM dev_stage as run_stage
+
+# If we aren't using the image to develop, i.e. we aren't opening this image as a VS Code's dev container,
+# we copy the workspace instead of mounting it.
+COPY ROS "${CATKIN_WORKSPACE}/src"
+
+# Activate ROS environment.
+RUN source "/opt/ros/noetic/setup.bash" && \
+    # Build our catkin environment.
+    catkin build
+
+ENTRYPOINT ["/bin/bash", "-ic", "source ${CATKIN_WORKSPACE}/devel/setup.bash && roslaunch bfmc_interface run_car_simulated.launch"]

@@ -1,0 +1,11 @@
+{
+    "[cmake]": {
+        "editor.tabSize": 4,
+        "editor.detectIndentation": false
+    },
+    "C_Cpp.autoAddFileAssociations": false,
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/Pi_Platform/build/merged_compile_commands.json",
+    "C_Cpp.dimInactiveRegions": true,
+    "editor.formatOnSave": true,
+    "cmake.configureOnOpen": false,
+}
