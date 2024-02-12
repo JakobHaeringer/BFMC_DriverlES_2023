@@ -1,0 +1,28 @@
+<launch>
+    <!-- Sets the ROSCONSOLE_CONFIG_FILE to activate more detailed DEBUG information - more information how to use it see rosconsole.config -->
+    <env name="ROSCONSOLE_CONFIG_FILE"   value="$(find bfmc_interface)/config/rosconsole.config"/>
+    <!-- Adds the node from which the ROS_INFO etc. is beeing sent from. If you are interested in filename and line number of ROS_INFO etc. check ${file} and ${line} -->
+    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${node}] : ${message}"/>
+
+    <!-- Add a parameter to the ROS parameter server so nodes can query whether they are running inside the simulator or not.
+         This is mainly intended to be used by python ROS nodes. For C/C++ nodes an additional preprocessor define is set. -->
+    <param name="ITMOVES_SIMULATOR" type="bool" value="true"/>
+    <param name="use_sim_time"      type="bool" value="true"/>
+
+    <!-- Launch the ROS-TCP-Endpoint. -->
+    <include file="$(find ros_tcp_endpoint)/launch/endpoint.launch">
+        <arg name="tcp_ip"      value="0.0.0.0"/>
+        <arg name="tcp_port"    value="$(optenv ITMOVES_SIMULATOR_PORT 10000)"/>
+    </include>
+
+    <!-- Launch Car Nodes. -->
+    <include file="$(find bfmc_interface)/launch/run_car_autonomous.launch"/>
+
+    <!-- In the actual vehicle the camera image is processed on a separate piece of hardware (Nvidia Jetson TX2) that is not part of the ROS network.
+         Instead, the processed image data is send from the Nvidia Jetson TX2 to the ROS network running on a Raspberry Pi via UDP. There it is received
+         by a dedicated perception listener node and then published inside the ROS network.
+
+         But for simulation purposes, the camera image processing has to be done inside the ROS network for architectural reasons. That's why below node has
+         been written that does essentially the same as the camera image processing code running on the Nvidia Jetson TX2 but wrapped in a ROS node. -->
+    <node pkg="bfmc_input"  type="camera_perception_node"   name="camera_perception"   output="screen"/>
+</launch>

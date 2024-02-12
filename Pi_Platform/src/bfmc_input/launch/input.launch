@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="bfmc_input"  type="imu_node.py"                      name="imu"                          output="screen"/>
+    <node pkg="bfmc_input"  type="wheel_speed_node"                 name="wheel_speed"                  output="screen"/>
+    <node pkg="bfmc_input"  type="camera_listener_node"             name="camera_perception_listener"   output="screen"/>
+    <node pkg="bfmc_input"  type="traffic_light_node.py"            name="traffic_light"                output="screen"/>
+</launch>

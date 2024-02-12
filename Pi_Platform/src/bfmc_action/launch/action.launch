@@ -1,0 +1,57 @@
+<launch>
+    <arg name="startState"            default="0"/>
+    <arg name="distanceToDrive"       default="10000"/>
+    <arg name="speedDefault"          default="0.8"/>
+    <arg name="speedReduced"          default="0.5"/>
+    <arg name="speedParking"          default="0.3"/>
+    <arg name="speedHighWay"          default="1"/>
+    <arg name="speedMax"              default="1.3"/>
+    <arg name="currentNodeID"         default="86"/>
+    <arg name="targetNodeID"          default="242"/>
+    <arg name="raceMode"              default="false"/>
+    <!-- Timings for different scenarios in seconds. -->
+    <arg name="timings/startUp"       default="10"/>
+    <arg name="timings/stop"          default="3.1"/>
+    <arg name="timings/pedestrian"    default="15"/>
+    <!-- Initialization EgoPose -->
+    <arg name="initialPoseX"          default="0.83"/>
+    <arg name="initialPoseY"          default="14.67"/>
+    <arg name="initialPoseYaw"        default="1.570796327"/>
+
+    <node pkg="bfmc_action" type="planner_node" name="planner"  output="screen">
+    <!-- Possible states for parameter startState:
+            START_UP = 0
+            FOLLOW_LANE = 1
+            INTERSECTION = 2
+            STOP = 3
+            CROSSWALK = 4
+            PARKING = 5
+            ROUTE_PLANNING = 6
+            PRIORITY_ROAD = 7
+            PEDESTRIAN = 8
+            SINGLE_ONE_WAY = 9
+            CHANGE_LANE   = 10
+            TRAFFIC_LIGHT  = 11,
+            ROUNDABOUT = 12,
+            FINISH = 31 -->
+        <param name="startState"            value="$(arg startState)"/>
+        <param name="distanceToDrive"       value="$(arg distanceToDrive)"/>
+        <param name="speedDefault"          value="$(arg speedDefault)"/>
+        <param name="speedReduced"          value="$(arg speedReduced)"/>
+        <param name="speedParking"          value="$(arg speedParking)"/>
+        <param name="speedHighWay"          value="$(arg speedHighWay)"/>
+        <param name="speedMax"              value="$(arg speedMax)"/>
+        <param name="currentNodeID"         value="$(arg currentNodeID)"/>
+        <param name="targetNodeID"          value="$(arg targetNodeID)"/>
+        <param name="raceMode"              value="$(arg raceMode)"/>
+        <!-- Timings for different scenarios in seconds. -->
+        <param name="timings/startUp"       value="$(arg timings/startUp)"/>
+        <param name="timings/stop"          value="$(arg timings/stop)"/>
+        <param name="timings/pedestrian"    value="$(arg timings/pedestrian)"/>
+        <!-- Initialization EgoPose -->
+        <param name="initialPoseX"          value="$(arg initialPoseX)"/>
+        <param name="initialPoseY"          value="$(arg initialPoseY)"/>
+        <param name="initialPoseYaw"        value="$(arg initialPoseYaw)"/>
+    </node>
+</launch>
+

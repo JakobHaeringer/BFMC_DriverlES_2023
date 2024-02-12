@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="bfmc_output" type="serial_handler_node"  name="serial_handler"   output="screen"/>
+</launch>

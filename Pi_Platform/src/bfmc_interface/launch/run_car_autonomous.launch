@@ -1,0 +1,11 @@
+<launch>
+    <!-- Sets the ROSCONSOLE_CONFIG_FILE to activate more detailed DEBUG information - more information how to use it see rosconsole.config -->
+    <env name="ROSCONSOLE_CONFIG_FILE"   value="$(find bfmc_interface)/config/rosconsole.config"/>
+    <!-- Adds the node from which the ROS_INFO etc. is beeing sent from. If you are interested in filename and line number of ROS_INFO etc. check ${file} and ${line} -->
+    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${node}] : ${message}"/>
+
+    <!-- Inlcude launch files from each package -->
+    <include file="$(find bfmc_action)/launch/action.launch"/>
+    <include file="$(find bfmc_input)/launch/input.launch"/>
+    <include file="$(find bfmc_output)/launch/output.launch"/>
+</launch>

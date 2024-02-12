@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# This script should be used to build this catkin workspace, instead of directly calling catkin build or catkin_make,
+# because it ensures that relevant information for C/C++ intellisense in Visual Studio Code is generated alongside
+# the build process.
+#
+# If you do not use this script to build this workspace, the build itself will work just fine but your C/C++ intellisense
+# inside Visual Studio Code will not work properly and make modifying the code a living hell.
+#
+# The approach implemented below is based on https://samarth-robo.github.io/blog/2020/12/03/vscode_ros.html.
+
+cd $(dirname "$0")
+# Build the workspace using catkin build (passing along any supplied arguments) and make sure compile commands are exported
+# because they are required for the C/C++ intellisense intregation we use.
+catkin build -DCMAKE_EXPORT_COMPILE_COMMANDS=1 "$@"
+# Gather all generated compile_commands.json files and merge them into a single file which is referenced by Visual Studio Code.
+# C/C++ intellisense. Note that the reference is defined inside the devcontainer.json.
+cat build/**/compile_commands.json | jq -s 'add' > build/merged_compile_commands.json

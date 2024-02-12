@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>bfmc_output</name>
+  <version>0.0.0</version>
+  <description>The output package</description>
+
+  <maintainer email="futuremobilitychallenge@bosch.com">BFMC</maintainer>
+
+  <license>BSD-3</license>
+
+  <url type="website">boschfuturemobility.com</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>bfmc_interface</depend>
+</package>
