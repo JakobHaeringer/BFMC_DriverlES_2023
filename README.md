@@ -117,7 +117,7 @@ As options for the parameter `startState` the implemented states of the vehicle 
 | `TRAFFIC_LIGHT`  | 11       |
 | `ROUNDABOUT`     | 12       |
 | `FINISH`         | 31       |
-                                                                                                                                                                                                                                                          |
+
 # Software which needs to be flashed onto the vehicle and how to start the vehicle
 | Software                   | Sourcecode                 | Information                                                                                                                              |
 | -------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
