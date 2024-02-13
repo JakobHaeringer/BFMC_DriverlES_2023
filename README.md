@@ -9,6 +9,20 @@
 - [Software which needs to be flashed onto the vehicle and how to start the vehicle](#software-which-needs-to-be-flashed-onto-the-vehicle-and-how-to-start-the-vehicle)
 - [Network setup for the Raspberry Pi and the Nvidia Jetson TX2](#network-setup-for-the-raspberry-pi-and-the-nvidia-jetson-tx2)
 
+## What are the main capabilities this repository offers?
+
+The repository provides a comprehensive solution for autonomous vehicle perception and planning in the context of the Bosch Future Mobility Challenge (BFMC). It includes algorithms for lane detection, object detection, and behavior planning, which are essential for navigating a vehicle through a simulated environment or a physical track with various traffic scenarios.
+
+The primary functions and features include:
+1. **Lane Detection:** Utilizing computer vision techniques to identify lane markings from camera images, estimate the vehicle's position relative to the lane, and calculate the curvature of the road ahead.
+2. **Object Detection:** Employing a trained YOLOv5 neural network model to detect and classify objects such as cars, pedestrians, traffic signs, and traffic lights within the camera's field of view.
+3. **Behavior Planning:** Implementing an A* algorithm for route planning and a set of actions that dictate the vehicle's maneuvers based on sensor inputs, detected objects, and traffic rules.
+4. **Sensor Data Handling:** Processing data from wheel speed sensors and an Inertial Measurement Unit (IMU) to determine the vehicle's speed, orientation, and acceleration.
+5. **Traffic Light Detection:** Receiving and interpreting traffic light states from an environmental server to make informed decisions at intersections.
+6. **Serial Communication:** Managing communication between the Raspberry Pi and the STM32 microcontroller board to send actuation commands based on the planning algorithm's output.
+
+The repository is designed to work with both a simulated environment provided by the BFMC simulator and a physical setup with actual sensors and actuators. It leverages ROS (Robot Operating System) for handling inter-process communication and provides a robust framework for developing and testing autonomous driving algorithms.
+
 # Car setup
 ![Car setup](Pi_Platform/doc/source/images/car_setup.jpg)<br>
 *From left to right: STM Nucleo F401RE, Nvidia Jetson TX2, Raspberry Board Pi 4 Model B*<br>
