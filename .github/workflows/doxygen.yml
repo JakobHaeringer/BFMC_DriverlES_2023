@@ -19,7 +19,7 @@ jobs:
       run: sudo apt-get install doxygen
       
     - name: Generate Doxygen documentation
-      working-directory: main/Pi_Platform/doc/source
+      working-directory: Pi_Platform/doc/source
       run: doxygen Doxyfile
 
     - name: Deploy to GitHub Pages
@@ -27,4 +27,4 @@ jobs:
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: main/Pi_Platform/doc/source/html
+        FOLDER: Pi_Platform/doc/source/html
