@@ -27,4 +27,4 @@ jobs:
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: html
+        FOLDER: main/Pi_Platform/doc/source/html
