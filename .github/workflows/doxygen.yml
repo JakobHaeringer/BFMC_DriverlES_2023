@@ -25,6 +25,6 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.5
       with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        token: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
         FOLDER: Pi_Platform/doc/source/html
