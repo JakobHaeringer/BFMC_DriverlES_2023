@@ -1,0 +1,30 @@
+digraph "src/bfmc_output/include/serial_handler/Message.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/bfmc_output/include\l/serial_handler/Message.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="The header file is for the message conversion to send data to the STM board."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/bfmc_output/include\l/serial_handler/ResponseHandler.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_response_handler_8hpp.html",tooltip="The header file is for the response handling of messages received by the Raspberry Pi from the STM bo..."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="src/bfmc_output/include\l/serial_handler/serial\l_handler_node.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$serial__handler__node_8hpp.html",tooltip="The header file holds the class for converting the ROS command messages to messages that can be sent ..."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="src/bfmc_output/src\l/serial_handler/serial\l_handler_node.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$serial__handler__node_8cpp.html",tooltip="This file holds the logic for converting the ROS command messages to messages that can be sent to the..."];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="src/bfmc_output/include\l/serial_handler/SerialComManager.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_serial_com_manager_8hpp.html",tooltip="The header file holds the class for sending commands to the STM board."];
+  Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="src/bfmc_output/src\l/serial_handler/SerialComManager.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_serial_com_manager_8cpp.html",tooltip="This file holds the logic for sending commands to the STM board vie Serial."];
+  Node2 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="src/bfmc_output/include\l/serial_handler/SerialPortHandler.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_serial_port_handler_8hpp.html",tooltip="The header file holds the class for sending commands to the STM board."];
+  Node7 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="src/bfmc_output/src\l/serial_handler/SerialPort\lHandler.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_serial_port_handler_8cpp.html",tooltip="The header file holds the class for sending commands to the STM board."];
+  Node2 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="src/bfmc_output/src\l/serial_handler/ResponseHandler.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_response_handler_8cpp.html",tooltip="This file implements the response handling of messages received by the Raspberry Pi from the STM boar..."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="src/bfmc_output/src\l/serial_handler/Message.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_message_8cpp.html",tooltip="This file implements the message conversion for the commands sent to the STM board."];
+}

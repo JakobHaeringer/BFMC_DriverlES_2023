@@ -1,0 +1,7 @@
+digraph "NodeData"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{NodeData\n|+ m_id\l+ m_x\l+ m_y\l+ m_crossLine\l+ connectedNodes\l|+ NodeData()\l+ NodeData()\l+ operator\<()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+}

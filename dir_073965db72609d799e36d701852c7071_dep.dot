@@ -1,0 +1,11 @@
+digraph "src/bfmc_input/src/camera_perception" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_bc30053a5617f3b89354eb74ed2ccd27 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="src" fontname="Helvetica", fontsize="10", URL="dir_bc30053a5617f3b89354eb74ed2ccd27.html"]
+  dir_073965db72609d799e36d701852c7071 [shape=box, label="camera_perception", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_073965db72609d799e36d701852c7071.html"];
+  }
+  dir_0bc7d705dc9d63789dddf6c6b710b883 [shape=box label="include" fillcolor="white" style="filled" color="red" URL="dir_0bc7d705dc9d63789dddf6c6b710b883.html"];
+  dir_073965db72609d799e36d701852c7071->dir_0bc7d705dc9d63789dddf6c6b710b883 [headlabel="7", labeldistance=1.5 headhref="dir_000016_000009.html"];
+}

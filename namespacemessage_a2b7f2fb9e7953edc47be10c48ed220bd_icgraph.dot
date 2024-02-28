@@ -1,0 +1,44 @@
+digraph "message::getTextForKey"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="message::getTextForKey",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Provide the cmd key associated to an action."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="message::brake",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemessage.html#a41a7181d3cd4dc9c0b2a9c1c678220dd",tooltip="Construct the string to be sent, associated to brake action."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="SerialComManager::sendBrake",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_serial_com_manager.html#a6bc65cfd5969b51d71bce3b3215f91dc",tooltip="Send the desired brake value to the STM board."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="serialHandlerNode::\lfuncCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_handler_node.html#a26fce782f5647c054185814e956c9066",tooltip="The callback function that send a command to the STM board upon receiving a command by the ROS subscr..."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="serialHandlerNode::init",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_handler_node.html#abb6092109287830784fd0cb6c7de3d8d",tooltip="Subscribe to the ROS command messages and attach all the actions to the responseHandler callback."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="message::enpb",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemessage.html#a81cf077b7b49d7b7ae0684a409454173",tooltip="Construct the string to be sent, associated to encoder publisher activating."];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="SerialComManager::sendEncoder\lPublisher",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_serial_com_manager.html#aed9d55b3dee00db42301ca96d98b3215",tooltip="Send the desired encoder publisher state to the STM board."];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="message::pida",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemessage.html#a06a951d3bbd4db9bf7b6445c6634c4f6",tooltip="Construct the string to be sent, associated to pid activating."];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="SerialComManager::sendPid\lState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_serial_com_manager.html#abad688f34c5afb05b70235159db99dc7",tooltip="Send the desired PID state to the STM board."];
+  Node9 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="message::pids",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemessage.html#a5847040afe8d8f9911fd82090f18e798",tooltip="Construct the string to be sent, associated to setting the pid values."];
+  Node10 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="SerialComManager::sendPid\lParam",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_serial_com_manager.html#af9a9e2ea14758d4c07567520eca1e255",tooltip="Send the desired settings for the pid controller to the STM board."];
+  Node11 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="message::speed",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemessage.html#a9f68c389eb9d71e538b1a0cd8c3f24c7",tooltip="Construct the string to be sent, associated to speed action."];
+  Node12 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="ITMOVES::Command::publish",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_command.html#a2e0f319a38e9256f0822cb964bf65310",tooltip="Publishes either a command to stop the vehicle or a steering and speed command."];
+  Node13 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$planner__node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627",tooltip="Main function for handling the behavior planning of the vehicle."];
+  Node12 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="SerialComManager::sendSpeed",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_serial_com_manager.html#a71702388a08d1c79462f1e3ebc44a9f1",tooltip="Send the desired speed to the STM board."];
+  Node15 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="message::steer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemessage.html#a4632ee652e66deb8b43ae58fa24bc380",tooltip="Construct the string to be sent, associated to steer action."];
+  Node16 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="SerialComManager::sendSteer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_serial_com_manager.html#a90828104b999524d0a9d51262bcb29c4",tooltip="Send the desired steering angle to the STM board."];
+  Node17 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

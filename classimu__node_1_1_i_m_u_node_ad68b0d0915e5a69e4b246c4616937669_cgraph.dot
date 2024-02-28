@@ -1,0 +1,15 @@
+digraph "imu_node.IMUNode.run"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="imu_node.IMUNode.run",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="imu_node.IMUNode._init_imu",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classimu__node_1_1_i_m_u_node.html#a4db87ee474797087ff18011c9767916f",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="imu_node.IMUNode._poll_imu",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classimu__node_1_1_i_m_u_node.html#adab1b62e344a2b0e255d1f95cf3b785b",tooltip=" "];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="imu_node.IMUNode._publish\l_message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classimu__node_1_1_i_m_u_node.html#a1062a4f6b25a00abb8dc2021324d8d03",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

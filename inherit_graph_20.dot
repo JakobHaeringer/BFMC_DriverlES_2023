@@ -1,0 +1,8 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="serialPortHandler",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html",tooltip="This class handles the sending of the messages to the STM board via serial and it forwards the receiv..."];
+}

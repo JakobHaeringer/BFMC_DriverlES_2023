@@ -1,0 +1,7 @@
+digraph "imu_node.IMUNode"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{imu_node.IMUNode\n|+ gravity\l- _publisher\l- _imu_settings\l- _imu\l- _poll_interval\l|+ __init__()\l+ run()\l- _init_imu()\l- _poll_imu()\l- _publish_message()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+}

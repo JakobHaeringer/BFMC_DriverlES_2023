@@ -1,0 +1,21 @@
+digraph "LaneDetection::laneDetectAlgo"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="LaneDetection::laneDetectAlgo",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Main function executing the preprocessing routine and calling necessary functions for detecting lanes..."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="LaneDetection::boundaryDetection",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_lane_detection.html#a4808f3d5e95a73cb2916b4f7dfcb536f",tooltip="Identify's the starting position of the lanes in the current frame."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="testCol",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_lane_detection_8cpp.html#a72be4fc48de87739d1493aa2c14c9246",tooltip="Variable to change the color of the search windows so the user can see if currently the left or the r..."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="LaneDetection::calHist",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_lane_detection.html#a997957c786ad634d5e925517674f19ce",tooltip="Creates a histogram of the number of white pixels per column."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="LaneDetection::laneCoefEstimate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_lane_detection.html#aef213a4d82988d59e9a91f1f902f43b1",tooltip="Estimates the coefficients of the 3rd degree polynomial that fits the detected lane the best."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="LaneDetection::laneFitting",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_lane_detection.html#a82cac619e0b8b9280c7a521ac9338cd0",tooltip="Solves the third degree polynomial with the estimated coefficients for every X-Value."];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="LaneDetection::laneSearch",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_lane_detection.html#ae200d3bb5bcc79c16403928bdac9d7bb",tooltip="Creates a vector of y values for each row whereas the y value is the position of the lane in that row..."];
+  Node7 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

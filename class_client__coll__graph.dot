@@ -1,0 +1,7 @@
+digraph "Client"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Client\n|- io_service\l- socket\l- recv_buffer\l- remote_endpoint\l- nh\l- laneDetectPub\l- signDetectPub\l- laneDetectMsg\l- signDetectMsg\l|+ Client()\l+ Receiver()\l+ wait()\l+ handle_receive()\l+ decodeMessage()\l+ split()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="This class implements the Raspberry Pi UDP listener that receives messages and publishes them on the ..."];
+}

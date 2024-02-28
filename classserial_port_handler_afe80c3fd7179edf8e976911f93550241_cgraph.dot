@@ -1,0 +1,17 @@
+digraph "serialPortHandler::write"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="serialPortHandler::\lwrite",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Sends data over UART, calls the do_write function via the io service in the other thread."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="serialPortHandler::\ldo_writeString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html#ad05c8c3294f72081460e78aff698bb5b",tooltip="Callback to handle write call from outside this class."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="serialPortHandler::\lwrite_start",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html#aab7a7bdcb6406f5fabf92630cc98700e",tooltip="Start an asynchronous write and call write_complete when it completes or fails."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="serialPortHandler::\lwrite_complete",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html#a76acf850c877f19c934732447f5125c4",tooltip="The asynchronous read operation has now completed or failed and returned an error."];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="serialPortHandler::\ldo_close",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html#a5f14e250fd3ecb6eec7200b501c668e1",tooltip="Something has gone wrong, so close the socket & make this object inactive."];
+  Node4 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

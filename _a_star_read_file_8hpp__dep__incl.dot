@@ -1,0 +1,19 @@
+digraph "src/bfmc_action/include/planner/AStarReadFile.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/bfmc_action/include\l/planner/AStarReadFile.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="The header file for accessing the map data to perform the AStar algorithm used in the BFMC 2023."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/bfmc_action/include\l/planner/AStar.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_a_star_8hpp.html",tooltip="The header file for the AStar algorithm used in the BFMC 2023."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="src/bfmc_action/include\l/planner/Actions.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_actions_8hpp.html",tooltip="The header file for actions used in the BFMC 2023."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="src/bfmc_action/src\l/planner/Actions.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_actions_8cpp.html",tooltip="The file implements actions used in the BFMC 2023."];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="src/bfmc_action/src\l/planner/planner_node.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$planner__node_8cpp.html",tooltip="This file manages the Environment, Action and Command classes and is responsible for the behavior pla..."];
+  Node2 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="src/bfmc_action/src\l/planner/AStar.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_a_star_8cpp.html",tooltip="The file implements the AStar algorithm used in the BFMC 2023."];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="src/bfmc_action/src\l/planner/AStarReadFile.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_a_star_read_file_8cpp.html",tooltip="The file implements the access to the map data to perform the AStar algorithm used in the BFMC 2023."];
+}

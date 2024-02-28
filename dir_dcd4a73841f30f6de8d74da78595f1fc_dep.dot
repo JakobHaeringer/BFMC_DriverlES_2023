@@ -1,0 +1,15 @@
+digraph "src/bfmc_output/src" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_8d754720af9df31c0ddbc5523ad1cccc {
+    graph [ bgcolor="#ddddee", pencolor="black", label="bfmc_output" fontname="Helvetica", fontsize="10", URL="dir_8d754720af9df31c0ddbc5523ad1cccc.html"]
+  dir_f166f6beea1ca6afa00f06e7bcaf53c0 [shape=box label="include" fillcolor="white" style="filled" color="red" URL="dir_f166f6beea1ca6afa00f06e7bcaf53c0.html"];
+  subgraph clusterdir_dcd4a73841f30f6de8d74da78595f1fc {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_dcd4a73841f30f6de8d74da78595f1fc.html"];
+    dir_dcd4a73841f30f6de8d74da78595f1fc [shape=plaintext label="src"];
+  dir_1420caf547e2f343560bbc4753037663 [shape=box label="serial_handler" fillcolor="white" style="filled" URL="dir_1420caf547e2f343560bbc4753037663.html"];
+  }
+  }
+  dir_1420caf547e2f343560bbc4753037663->dir_f166f6beea1ca6afa00f06e7bcaf53c0 [headlabel="5", labeldistance=1.5 headhref="dir_000022_000019.html"];
+}

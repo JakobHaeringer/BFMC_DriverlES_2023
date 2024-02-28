@@ -1,0 +1,8 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="ITMOVES::Actions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html",tooltip="This class contains all functions for the vehicle states, auxiliary functions and an instance of the ..."];
+}

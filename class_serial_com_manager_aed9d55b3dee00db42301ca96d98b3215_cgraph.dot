@@ -1,0 +1,23 @@
+digraph "SerialComManager::sendEncoderPublisher"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="SerialComManager::sendEncoder\lPublisher",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Send the desired encoder publisher state to the STM board."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="message::enpb",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemessage.html#a81cf077b7b49d7b7ae0684a409454173",tooltip="Construct the string to be sent, associated to encoder publisher activating."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="message::getTextForKey",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemessage.html#a2b7f2fb9e7953edc47be10c48ed220bd",tooltip="Provide the cmd key associated to an action."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="serialPortHandler::\lwrite",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html#afe80c3fd7179edf8e976911f93550241",tooltip="Sends data over UART, calls the do_write function via the io service in the other thread."];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="serialPortHandler::\ldo_writeString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html#ad05c8c3294f72081460e78aff698bb5b",tooltip="Callback to handle write call from outside this class."];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="serialPortHandler::\lwrite_start",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html#aab7a7bdcb6406f5fabf92630cc98700e",tooltip="Start an asynchronous write and call write_complete when it completes or fails."];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="serialPortHandler::\lwrite_complete",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html#a76acf850c877f19c934732447f5125c4",tooltip="The asynchronous read operation has now completed or failed and returned an error."];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="serialPortHandler::\ldo_close",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html#a5f14e250fd3ecb6eec7200b501c668e1",tooltip="Something has gone wrong, so close the socket & make this object inactive."];
+  Node7 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

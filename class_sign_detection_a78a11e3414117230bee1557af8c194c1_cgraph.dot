@@ -1,0 +1,16 @@
+digraph "SignDetection::detect"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="SignDetection::detect",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Main function executing the sign detection and calling necessary filtering functions."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="SignDetection::evaluateDistance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_sign_detection.html#aeae21851cea2e66b58d2fe09de663ef2",tooltip="Determines the distance of the detections to the vehicle and adds that information to the individual ..."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="SignDetection::evaluateSide",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_sign_detection.html#af4674f982431d5ece8ad808b824807de",tooltip="Determines in which side of the image the detections are in and adds that information to the individu..."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="SignDetection::filterMisdetections",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_sign_detection.html#afc4291afafb9e4d498ad428d3d60de89",tooltip="Runs every Detection object through a series of if statements that remove false detections to a certa..."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="SignDetection::mapDetections",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_sign_detection.html#a40a45d5d7272a9797eb37f3751a4a49f",tooltip="Maps all detected objects in the frame into an individual Detection object accordingly."];
+}

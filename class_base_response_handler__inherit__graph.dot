@@ -1,0 +1,9 @@
+digraph "BaseResponseHandler"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{BaseResponseHandler\n|# m_active\l|+ operator()()\l+ _run()\l+ deactive()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="This class builds the base for handling the received messages from the STM board via serial."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{ResponseHandler\n|- read_msgs_\l- m_isResponse\l- m_valid_response\l- m_keyCallbackFncMap\l|+ ResponseHandler()\l+ operator()()\l+ _run()\l+ attach()\l+ detach()\l+ createCallbackFncPtr()\l+ createCallbackFncPtr()\l- processChr()\l- checkResponse()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_response_handler.html",tooltip="This class handles the receiving of the messages from the STM board via serial."];
+}

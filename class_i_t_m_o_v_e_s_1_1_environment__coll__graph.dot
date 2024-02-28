@@ -1,0 +1,15 @@
+digraph "ITMOVES::Environment"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{ITMOVES::Environment\n|+ initialCarYaw\l+ currentState\l+ travelledDistance\l+ onHighWay\l+ changeLanes\l+ carIsParked\l+ changeLaneState\l+ tStart\l+ egoPoseMsg\l+ stopSign\land 48 more...\l- subs\l- egoPosePub\l|+ Environment()\l+ ~Environment()\l+ initROIs()\l+ publish()\l+ signObjectReset()\l- signDetectionCallback()\l- laneDetectionCallback()\l- wheelSpeedCallback()\l- imuCallback()\l- trafficLightStartCallback()\l- trafficLightEastCallback()\l- trafficLightSouthCallback()\l- trafficLightWestCallback()\l- stateCallback()\l- validateDetection()\l- isInROI()\l- boundYawWithinZeroAnd2PI()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="This class combines all values from the input sensors, processes them further and then sets the vehic..."];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +currentPose\n+gpsEgoPose" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node2 [label="{Pose\n|+ nodeID\l+ x\l+ y\l+ yaw\l+ speed\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct_pose.html",tooltip="Struct that holds the current pose of the vehicle."];
+  Node3 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +rampInfo" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node3 [label="{Ramp\n|+ drivingUpwards\l+ drivingDownwards\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct_ramp.html",tooltip="Struct that holds information about driving up/down the ramp."];
+  Node4 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +trafficLightEastROI\n+trafficLightSouthROI\n+trafficLightStartROI\n+trafficLightWestROI" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 [label="{DetectionROI\n|+ x1\l+ y1\l+ x2\l+ y2\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct_detection_r_o_i.html",tooltip="Struct for defining region of interests in the shape of rectangles to specify where the respective ob..."];
+  Node5 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +pedestrian" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{Pedestrian\n|+ detected\l+ enteredArea\l+ currentArea\l+ crossedRoad\l|+ reset()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct_pedestrian.html",tooltip="Struct used to store information about detected pedestrians."];
+}

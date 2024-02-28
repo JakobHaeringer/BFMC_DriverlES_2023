@@ -1,0 +1,12 @@
+digraph "WheelSpeed::WheelSpeed"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="WheelSpeed::WheelSpeed",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Construct a new Wheel Speed object and initialize the GPIO pins, as well as the ROS publisher."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="WheelSpeed::wheelTicksLeft\lCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_wheel_speed.html#aa44f1fb7592b972a158e7db806fdc870",tooltip="To increase the number of flanks that occurred on the left wheel."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="WheelSpeed::wheelTicksRight\lCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_wheel_speed.html#a733869d4d37fa3ec22aff0c260ac3137",tooltip="To increase the number of flanks that occurred on the right wheel."];
+}

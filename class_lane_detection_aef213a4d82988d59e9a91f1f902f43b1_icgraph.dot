@@ -1,0 +1,10 @@
+digraph "LaneDetection::laneCoefEstimate"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="LaneDetection::laneCoefEstimate",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Estimates the coefficients of the 3rd degree polynomial that fits the detected lane the best."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="LaneDetection::laneDetectAlgo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_lane_detection.html#a0f67f11589b578831c55018f374ee354",tooltip="Main function executing the preprocessing routine and calling necessary functions for detecting lanes..."];
+}

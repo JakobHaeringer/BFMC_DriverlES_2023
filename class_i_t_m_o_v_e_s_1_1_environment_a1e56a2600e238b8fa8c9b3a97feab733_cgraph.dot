@@ -1,0 +1,22 @@
+digraph "ITMOVES::Environment::Environment"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="ITMOVES::Environment\l::Environment",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Construct a new Environment object and initialize ROS Subscriber/ Publisher, various class members,..."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="ITMOVES::Environment\l::imuCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_environment.html#a8ac9e60baf8813d51715a33d8c480527",tooltip="Update the current yaw angle (> 0), detect driving upwards/downwards and detect the reset of the syst..."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="ITMOVES::Environment\l::initROIs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_environment.html#a3be4bc65480cba590d50df8bbd8957a6",tooltip="Initialize the region of interests in the shape of rectangles to specify where the respective object ..."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="ITMOVES::Environment\l::laneDetectionCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_environment.html#aefa227debe4b0ec57e077be8aa75d8cb",tooltip="Update the current distance to the center and the curvature coefficient of the lane triggered by the ..."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="ITMOVES::Environment\l::signDetectionCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_environment.html#a0f57888dd6990a89fffb66b7131e097b",tooltip="Set states according to detected signs/ objects within the correct ROI and store specific variables t..."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="ITMOVES::Environment\l::signObjectReset",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___group_objects.html#ga9188980b71d4f1f86862d94293fdba97",tooltip="This function will reset all detected signs and objects as well as their saved distances and specific..."];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="ITMOVES::Environment\l::stateCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_environment.html#a660cdd67a509715db03baa220caa4156",tooltip="Sets the current state based on topic \"/testState\"."];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="ITMOVES::Environment\l::wheelSpeedCallback",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_environment.html#a94e7f5afaa60f5595524c8b0a62bd571",tooltip="Update current global Pose based on the travelled distance and yaw angle triggered by the topic \"/aut..."];
+}

@@ -1,0 +1,7 @@
+digraph "ITMOVES::Command"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{ITMOVES::Command\n|+ speedDefault\l+ speedParking\l+ speedReduced\l+ speedHighWay\l+ speedMax\l+ speed\l+ steering\l+ stopVehicle\l- publisher\l- msg\l|+ Command()\l+ ~Command()\l+ publish()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="This class contains the publisher for the steering and speed commands and holds various speed values."];
+}

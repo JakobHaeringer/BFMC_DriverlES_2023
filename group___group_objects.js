@@ -1,0 +1,27 @@
+var group___group_objects =
+[
+    [ "signObjectReset", "group___group_objects.html#ga9188980b71d4f1f86862d94293fdba97", null ],
+    [ "carDetected", "group___group_objects.html#ga9c4e740e682ed6683c992f5dbd76a065", null ],
+    [ "closedRoadStand", "group___group_objects.html#ga7260876f463e006b44e1fc88de8f8e51", null ],
+    [ "competitorCarPose", "group___group_objects.html#ga5b8fd82a902f326148ebd3e3dad36602", null ],
+    [ "crossWalkSign", "group___group_objects.html#ga16a90a1841e620bad8dd0f196a311a39", null ],
+    [ "curveCoeff", "group___group_objects.html#gaa3a774a14445520a04aa1cfc8a5e37c9", null ],
+    [ "distanceToCar", "group___group_objects.html#ga86265d5c6e1e0b2fd28c04d0fea05c4d", null ],
+    [ "distanceToDrive", "group___group_objects.html#gafe20e3e56ab0a7872b91e3b69f392430", null ],
+    [ "distanceToObject", "group___group_objects.html#ga84f6fab569e63f2d562a092fe4113adb", null ],
+    [ "distanceToParkingSpot", "group___group_objects.html#ga31b5d66586805d7589daab526f33841c", null ],
+    [ "distanceToStopLine", "group___group_objects.html#gaca6dcc05efcd75b1cd42af45b0bb126c", null ],
+    [ "distanceToTrafficLight", "group___group_objects.html#ga89b417310340310a7c80193bf9001fa2", null ],
+    [ "midDistance", "group___group_objects.html#ga901eb24835c40b6ac5c7307faefc1233", null ],
+    [ "noEntryRoadSign", "group___group_objects.html#gacf39304844dec5c69b993afa1c2929e1", null ],
+    [ "oneWayRoadSign", "group___group_objects.html#ga470d2e6e6272ecbc688f538f247cbb85", null ],
+    [ "overtakeDistance", "group___group_objects.html#ga44f0828a91b2cc5782b5bf210ea15986", null ],
+    [ "parkingSign", "group___group_objects.html#ga56732684c2c7b797b67d984ad47d5951", null ],
+    [ "pedestrian", "group___group_objects.html#ga30ba7f1149344214e35cde82fe0792d6", null ],
+    [ "prioritySign", "group___group_objects.html#ga2130eaa8c434102b13691c45d3739e29", null ],
+    [ "roundAboutSign", "group___group_objects.html#ga741cec5599e323c16cd28fc4d576f7b5", null ],
+    [ "savedTravelledDistance", "group___group_objects.html#ga1291c21c9fac9ff0e3d7be004acfb7f1", null ],
+    [ "stopSign", "group___group_objects.html#ga1031a8a12f3a6eede047306dcf96eede", null ],
+    [ "timeStopLineDetected", "group___group_objects.html#ga4f53d0877fdd6149431272e9e2ad7d94", null ],
+    [ "trafficLightState", "group___group_objects.html#gac53cb9a6c9947e9a0a1962bedf990149", null ]
+];

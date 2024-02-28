@@ -1,0 +1,17 @@
+digraph "serialHandlerNode"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{serialHandlerNode\n|+ Subscribing\l- m_callbackFncObj\l|+ serialHandlerNode()\l+ ~serialHandlerNode()\l+ init()\l+ funcCallback()\l+ print()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="This class implements the translation from the Raspberry Pi ROS messages to messages that the STM boa..."];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_responseHandler" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node2 [label="{ResponseHandler\n|- read_msgs_\l- m_isResponse\l- m_valid_response\l- m_keyCallbackFncMap\l|+ ResponseHandler()\l+ operator()()\l+ _run()\l+ attach()\l+ detach()\l+ createCallbackFncPtr()\l+ createCallbackFncPtr()\l- processChr()\l- checkResponse()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_response_handler.html",tooltip="This class handles the receiving of the messages from the STM board via serial."];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node3 [label="{BaseResponseHandler\n|# m_active\l|+ operator()()\l+ _run()\l+ deactive()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_base_response_handler.html",tooltip="This class builds the base for handling the received messages from the STM board via serial."];
+  Node4 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_comManager" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 [label="{SerialComManager\n|- m_io_service\l- m_io_serviceThread\l- m_responseHandlerThread\l|+ SerialComManager()\l+ SerialComManager()\l+ ~SerialComManager()\l+ closeAll()\l+ sendSpeed()\l+ sendSteer()\l+ sendBrake()\l+ sendPidState()\l+ sendEncoderPublisher()\l+ sendPidParam()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_serial_com_manager.html",tooltip="This class holds the functions that sends commands to the STM board."];
+  Node5 -> Node4 [color="grey25",fontsize="10",style="solid",label=" -m_serialPort" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{serialPortHandler\n|+ tStart\l+ tEnd\l+ read_msg_\l- m_writeMtx\l- active_\l- io_service_\l- serialPort\l- write_msgs_\l- max_read_length\l|+ serialPortHandler()\l+ write()\l+ close()\l+ active()\l- read_start()\l- read_complete()\l- do_writeString()\l- write_start()\l- write_complete()\l- do_close()\l- flush_serial_port()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classserial_port_handler.html",tooltip="This class handles the sending of the messages to the STM board via serial and it forwards the receiv..."];
+  Node3 -> Node5 [color="grey25",fontsize="10",style="solid",label=" -m_responseHandler" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node3 -> Node4 [color="grey25",fontsize="10",style="solid",label=" -m_responseHandler" ,arrowhead="odiamond",fontname="Helvetica"];
+}

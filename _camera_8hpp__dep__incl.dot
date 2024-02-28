@@ -1,0 +1,11 @@
+digraph "src/bfmc_input/include/camera_perception/Camera.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/bfmc_input/include\l/camera_perception/Camera.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="The header file of the perception process implemented in ROS."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/bfmc_input/src\l/camera_perception/Camera.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_camera_8cpp.html",tooltip="This file implements the main process for the perception of the vehicle."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="src/bfmc_input/src\l/camera_perception/camera\l_perception_node.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$camera__perception__node_8cpp.html",tooltip="This file implements the ROS node for the perception of the vehicle implemented in ROS."];
+}

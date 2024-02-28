@@ -1,0 +1,54 @@
+digraph "main"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="main",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Main function for handling the behavior planning of the vehicle."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="ITMOVES::Actions::ChangeLane",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#a504f1c14fd8eb8be687b36f26ebfc98d",tooltip="Sets a sequence of steering and speed commands to switch between lanes."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="ITMOVES::Actions::Crosswalk",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#ab86b1d94cc60a9abc8bd8485fa154b3e",tooltip="Regulates the behavior of the vehicle approaching a crosswalk and changes the state depending on the ..."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="ITMOVES::Environment\l::signObjectReset",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___group_objects.html#ga9188980b71d4f1f86862d94293fdba97",tooltip="This function will reset all detected signs and objects as well as their saved distances and specific..."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="ITMOVES::Actions::FollowLane",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#a5a203db979dfc5d1ff5c0affedb3d443",tooltip="Sets the steering angle and speed based on the lane detection and performs an emergency braking if a ..."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="ITMOVES::Actions::Intersection",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#a25f63934ec27299780c5990883cc02f7",tooltip="Sets a sequence of static steering commands to cross the intersection."];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="ITMOVES::Actions::ParkCar",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#add5194af35468744709775e73bcc1363",tooltip="Finds the free parking spot (crosswise parking) and sets a sequence of steering and speed commands to..."];
+  Node7 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="ITMOVES::Actions::Pedestrian",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#a6970f8336a9f8fb6cf843faeef827068",tooltip="Regulates the behavior of the vehicle when encountering pedestrians in the crosswalk and on the roadw..."];
+  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Pedestrian::reset",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct_pedestrian.html#a8d440c0b93c17c226c56471275a67613",tooltip="Reset the struct Pedestrian."];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="ITMOVES::Actions::PriorityRoad",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#a399343a157e03c3349ba13aec819d578",tooltip="Regulates the behavior of the vehicle approaching an intersection with a priority sign."];
+  Node10 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="ITMOVES::Command::publish",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_command.html#a2e0f319a38e9256f0822cb964bf65310",tooltip="Publishes either a command to stop the vehicle or a steering and speed command."];
+  Node11 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="message::speed",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemessage.html#a9f68c389eb9d71e538b1a0cd8c3f24c7",tooltip="Construct the string to be sent, associated to speed action."];
+  Node12 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="message::getTextForKey",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemessage.html#a2b7f2fb9e7953edc47be10c48ed220bd",tooltip="Provide the cmd key associated to an action."];
+  Node1 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="ITMOVES::Environment\l::publish",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___group_ego.html#ga275f4f738ecd32969fa896324a92c948",tooltip="Ego pose publisher."];
+  Node1 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="ITMOVES::Actions::resetSystem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#acd87d0615d3fd62371af0e8417008429",tooltip="Resets certain environment variables."];
+  Node15 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="ITMOVES::Actions::Roundabout",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#a13001f2dbe33a134c370fe9dae49a84d",tooltip="Sets a sequence of steering and speed commands to drive through the roundabout."];
+  Node16 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="ITMOVES::Actions::RoutePlanning",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#a1c6c46e44416d7e7aa297ba0da5351f3",tooltip="Calculate the shortest route between two map nodes using the AStar algorithm and add the summed dista..."];
+  Node1 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="ITMOVES::Actions::Single\lOneWay",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#ab42a668de7aef4368867ae66c884c18e",tooltip="Turns the vehicle from the highway to the one-way street and then follows a car and controls the spee..."];
+  Node1 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="ITMOVES::Actions::StartUp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#a897ae630cb27f35ac1fe268835c2af63",tooltip="The function waits for all processes to start, plans the route, and drives when the traffic light is ..."];
+  Node1 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="ITMOVES::Actions::Stop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#aa2c46ea706e640f9042d1493307f869d",tooltip="Regulates the behavior of the vehicle approaching an intersection with a stop sign and brings the car..."];
+  Node20 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="ITMOVES::Actions::Traffic\lLight",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_t_m_o_v_e_s_1_1_actions.html#addf0ac6bc5a5738f279d190e7503a681",tooltip="Stops the vehicle at a red light and/or allows it to proceed at a green light."];
+  Node21 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

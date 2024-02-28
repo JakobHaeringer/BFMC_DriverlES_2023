@@ -1,0 +1,10 @@
+digraph "LaneDetection::laneSearch"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="LaneDetection::laneSearch",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Creates a vector of y values for each row whereas the y value is the position of the lane in that row..."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="testCol",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_lane_detection_8cpp.html#a72be4fc48de87739d1493aa2c14c9246",tooltip="Variable to change the color of the search windows so the user can see if currently the left or the r..."];
+}

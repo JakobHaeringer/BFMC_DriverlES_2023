@@ -1,0 +1,7 @@
+digraph "LaneDetection"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{LaneDetection\n|- perspectiveMatrix\l- originalImage\l- warpOriginalImage\l- warpEdgeImage\l- imageChannels\l- GreenBinary\l- mergeImage\l- histogramImage\l- histogramDistance\l- histogramCurvature\land 30 more...\l|+ LaneDetection()\l+ LaneDetection()\l+ ~LaneDetection()\l+ laneDetectAlgo()\l+ getEdgeDetectResult()\l+ getWarpEdgeDetectResult()\l+ getGreenChannel()\l+ getGreenBinary()\l+ getMergeImage()\l+ getHistImage()\land 9 more...\l- calHist()\l- boundaryDetection()\l- laneSearch()\l- laneCoefEstimate()\l- laneFitting()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="This class implements the lane search algorithm."];
+}

@@ -1,0 +1,15 @@
+digraph "src/bfmc_action/src" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_d1a6e8677a7494bf7a75cc7dcc9a2e50 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="bfmc_action" fontname="Helvetica", fontsize="10", URL="dir_d1a6e8677a7494bf7a75cc7dcc9a2e50.html"]
+  dir_9042b901ed7ab8d45633529e7aec90bc [shape=box label="include" fillcolor="white" style="filled" color="red" URL="dir_9042b901ed7ab8d45633529e7aec90bc.html"];
+  subgraph clusterdir_eea26e14530476b0904f5c704c7dc295 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_eea26e14530476b0904f5c704c7dc295.html"];
+    dir_eea26e14530476b0904f5c704c7dc295 [shape=plaintext label="src"];
+  dir_f5f8c78a23d14ae07048e85a941710f1 [shape=box label="planner" fillcolor="white" style="filled" URL="dir_f5f8c78a23d14ae07048e85a941710f1.html"];
+  }
+  }
+  dir_f5f8c78a23d14ae07048e85a941710f1->dir_9042b901ed7ab8d45633529e7aec90bc [headlabel="8", labeldistance=1.5 headhref="dir_000008_000005.html"];
+}
