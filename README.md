@@ -1,4 +1,5 @@
-# Table of contents <!-- omit from toc -->
+# BFMC DriverlES 2023
+
 - [Car setup](#car-setup)
 - [ROS architecture](#ros-architecture)
   - [Custom messages](#custom-messages)
@@ -62,15 +63,15 @@ Further information about the custom messages, e.g. the physical values of the m
 During real world application, input is provided by the sensors on the vehicle (camera, IMU, wheel speed sensor), V2X communication (traffic lights) from the servers on the race track, and an `/input/remote_state_control` which can be used to manually send a desired state to the vehicle. 
 | Topic                                     | Msg-Type                        | Publisher                                                                                                                               | Subscriber                        |
 | ----------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| `/input/camera/lane_detection`            | `bfmc_interface::LaneDetection` | `bfmc_input/src/camera_perception/camera_listener_node.cpp`<br>`bfmc_input/src/camera_perception/camera_perception_node.cpp`            | `bfmc_action/src/Environment.cpp` |
-| `/input/camera/sign_detection`            | `bfmc_interface::SignDetection` | `bfmc_input/src/camera_perception/camera_listener_node.cpp`<br>`bfmc_input/src/camera_perception/camera_perception_node.cpp`            | `bfmc_action/src/Environment.cpp` |
-| `/input/imu`                              | `bfmc_interface::IMU`           | `bfmc_input/scripts/imu/imu_node.py`                                                                                                    | `bfmc_action/src/Environment.cpp` |
-| `/input/environment/traffic_light/start`  | `bfmc_interface::TrafficLight`  | `bfmc_input/src/trafficLight/traffic_light_node.py`                                                                                     | `bfmc_action/src/Environment.cpp` |
-| `/input/environment/traffic_light/east`   | `bfmc_interface::TrafficLight`  | `bfmc_input/src/trafficLight/traffic_light_node.py`                                                                                     | `bfmc_action/src/Environment.cpp` |
-| `/input/environment/traffic_light/south`  | `bfmc_interface::TrafficLight`  | `bfmc_input/src/trafficLight/traffic_light_node.py`                                                                                     | `bfmc_action/src/Environment.cpp` |
-| `/input/environment/traffic_light/west`   | `bfmc_interface::TrafficLight`  | `bfmc_input/src/trafficLight/traffic_light_node.py`                                                                                     | `bfmc_action/src/Environment.cpp` |
-| `/input/wheel_speed`                      | `bfmc_interface::WheelSpeed`    | `bfmc_input/src/wheelspeed/wheel_speed_node.cpp`                                                                                        | `bfmc_action/src/Environment.cpp` |
-| `/input/remote_state_control`             | `std_msgs::UInt8`               | None - Manually publish desired state while testing                                                                                     | `bfmc_action/src/Environment.cpp` |
+| `/input/camera/lane_detection`            | `bfmc_interface::LaneDetection` | `bfmc_input/src/camera_perception/camera_listener_node.cpp` <br> `bfmc_input/src/camera_perception/camera_perception_node.cpp`            | `bfmc_action/src/planner/Environment.cpp` |
+| `/input/camera/sign_detection`            | `bfmc_interface::SignDetection` | `bfmc_input/src/camera_perception/camera_listener_node.cpp` <br> `bfmc_input/src/camera_perception/camera_perception_node.cpp`            | `bfmc_action/src/planner/Environment.cpp` |
+| `/input/imu`                              | `bfmc_interface::IMU`           | `bfmc_input/scripts/imu/imu_node.py`                                                                                                    | `bfmc_action/src/planner/Environment.cpp` |
+| `/input/environment/traffic_light/start`  | `bfmc_interface::TrafficLight`  | `bfmc_input/scripts/traffic_light/traffic_light_node.py`                                                                                     | `bfmc_action/src/planner/Environment.cpp` |
+| `/input/environment/traffic_light/east`   | `bfmc_interface::TrafficLight`  | `bfmc_input/scripts/traffic_light/traffic_light_node.py`                                                                                     | `bfmc_action/src/planner/Environment.cpp` |
+| `/input/environment/traffic_light/south`  | `bfmc_interface::TrafficLight`  | `bfmc_input/scripts/traffic_light/traffic_light_node.py`                                                                                     | `bfmc_action/src/planner/Environment.cpp` |
+| `/input/environment/traffic_light/west`   | `bfmc_interface::TrafficLight`  | `bfmc_input/scripts/traffic_light/traffic_light_node.py`                                                                                     | `bfmc_action/src/planner/Environment.cpp` |
+| `/input/wheel_speed`                      | `bfmc_interface::WheelSpeed`    | `bfmc_input/src/wheel_speed/wheel_speed_node.cpp`                                                                                        | `bfmc_action/src/planner/Environment.cpp` |
+| `/input/remote_state_control`             | `std_msgs::UInt8`               | None - Manually publish desired state while testing                                                                                     | `bfmc_action/src/planner/Environment.cpp` |
 
 ## Simulator topics
 During simulator application, input is provided by the simulator (camera, imu, wheelspeed, gps) and the ground truth of the ego pose is published to validate your algorithms.
@@ -78,7 +79,7 @@ During simulator application, input is provided by the simulator (camera, imu, w
 | ------------------------           | ------------------------------------- | ---------- | ------------------------------------------------ |
 | `/simulator/camera`                | `bfmc_interface::SimulatedCamera`     | simulator  | `bfmc_input/src/camera_perception/Camera.cpp`    |
 | `/simulator/imu`                   | `bfmc_interface::SimulatedIMU`        | simulator  | `bfmc_input/scripts/imu/imu_node.py`             |
-| `/simulator/wheel_speed`           | `bfmc_interface::SimulatedWheelSpeed` | simulator  | `bfmc_input/src/wheelspeed/wheel_speed_node.cpp` |
+| `/simulator/wheel_speed`           | `bfmc_interface::SimulatedWheelSpeed` | simulator  | `bfmc_input/src/wheel_speed/wheel_speed_node.cpp` |
 | `/simulator/gps`                   | `geometry_msgs/PointStamped`          | simulator  | TBD                                              |
 | `/simulator/ego_pose_ground_truth` | `geometry_msgs/PoseStamped`           | simulator  | None                                             |
 
@@ -86,8 +87,8 @@ During simulator application, input is provided by the simulator (camera, imu, w
 The output contains steering and speed commands sent to the Nucleo board via UART - also see [hardware setup](#car-setup). Furthermore, the calculated localization information (x, y, yaw, nodeID) is published and stored in ROS bags for later analysis. And additionally, the vehicle shall send detected characters and objects to an environment server (live traffic) (currently not implemented).
 | Topic                      | Msg-Type                        | Publisher                         | Subscriber                                                  |
 | -------------------------- | ------------------------------- | --------------------------------- | ----------------------------------------------------------- |
-| `/output/actuator_command` | `bfmc_interface::NucleoCommand` | `bfmc_action/src/Command.cpp`     | `bfmc_output/src/SerialHandler/serial_handler_node.cpp`     |
-| `/output/ego_pose`         | `bfmc_interface::EgoPose`       | `bfmc_action/src/Environment.cpp` | None                                                        |
+| `/output/actuator_command` | `bfmc_interface::NucleoCommand` | `bfmc_action/src/planner/Command.cpp`     | `bfmc_output/src/serial_handler/serial_handler_node.cpp`     |
+| `/output/ego_pose`         | `bfmc_interface::EgoPose`       | `bfmc_action/src/planner/Environment.cpp` | None                                                        |
 
 
 ## Launchfiles
