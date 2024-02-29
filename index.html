@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Raspberry Pi Platform: Main Page</title>
+<title>Raspberry Pi Platform: BFMC DriverlES 2023</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,11 +83,236 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Raspberry Pi Platform Documentation</div>  </div>
+<div class="title">BFMC DriverlES 2023 </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md__home_runner_work_BFMC_DriverlES_2023_BFMC_DriverlES_2023_README"></a></p><ul>
+<li><a href="#car-setup">Car setup</a></li>
+<li><a href="#ros-architecture">ROS architecture</a><ul>
+<li><a href="#custom-messages">Custom messages</a></li>
+<li><a href="#input-topics">Input topics</a></li>
+<li><a href="#simulator-topics">Simulator topics</a></li>
+<li><a href="#output-topics">Output topics</a></li>
+<li><a href="#launchfiles">Launchfiles</a></li>
+</ul>
+</li>
+<li><a href="#software-which-needs-to-be-flashed-onto-the-vehicle-and-how-to-start-the-vehicle">Software which needs to be flashed onto the vehicle and how to start the vehicle</a></li>
+<li><a href="#network-setup-for-the-raspberry-pi-and-the-nvidia-jetson-tx2">Network setup for the Raspberry Pi and the Nvidia Jetson TX2</a></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1"></a>
+What are the main capabilities this repository offers?</h1>
+<p>The repository provides a comprehensive solution for autonomous vehicle perception and planning in the context of the Bosch Future Mobility Challenge (BFMC). It includes algorithms for lane detection, object detection, and behavior planning, which are essential for navigating a vehicle through a simulated environment or a physical track with various traffic scenarios.</p>
+<p>The primary functions and features include:</p><ol type="1">
+<li><b>Lane <a class="el" href="struct_detection.html" title="Holds all the attributes which are relevant for a detected object.">Detection</a>:</b> Utilizing computer vision techniques to identify lane markings from camera images, estimate the vehicle's position relative to the lane, and calculate the curvature of the road ahead.</li>
+<li><b>Object <a class="el" href="struct_detection.html" title="Holds all the attributes which are relevant for a detected object.">Detection</a>:</b> Employing a trained YOLOv5 neural network model to detect and classify objects such as cars, pedestrians, traffic signs, and traffic lights within the camera's field of view.</li>
+<li><b>Behavior Planning:</b> Implementing an A* algorithm for route planning and a set of actions that dictate the vehicle's maneuvers based on sensor inputs, detected objects, and traffic rules.</li>
+<li><b>Sensor Data Handling:</b> Processing data from wheel speed sensors and an Inertial Measurement Unit (IMU) to determine the vehicle's speed, orientation, and acceleration.</li>
+<li><b>Traffic Light <a class="el" href="struct_detection.html" title="Holds all the attributes which are relevant for a detected object.">Detection</a>:</b> Receiving and interpreting traffic light states from an environmental server to make informed decisions at intersections.</li>
+<li><b>Serial Communication:</b> Managing communication between the Raspberry Pi and the STM32 microcontroller board to send actuation commands based on the planning algorithm's output.</li>
+</ol>
+<p>The repository is designed to work with both a simulated environment provided by the BFMC simulator and a physical setup with actual sensors and actuators. It leverages ROS (Robot Operating System) for handling inter-process communication and provides a robust framework for developing and testing autonomous driving algorithms.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Car setup</h1>
+<p><img src="car_setup.jpg" alt="" class="inline" title="Car setup"/><br  />
+ <em>From left to right: STM Nucleo F401RE, Nvidia Jetson TX2, Raspberry Board Pi 4 Model B</em><br  />
+ <img src="hardware_setup.png" alt="" class="inline" title="Hardware setup"/><br  />
+ <em>Hardware setup of all components, the connection types and the underlying voltages of the components.</em></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Type   </th><th class="markdownTableHeadNone">Name   </th><th class="markdownTableHeadNone">Number installed   </th><th class="markdownTableHeadNone">Location   </th><th class="markdownTableHeadNone">More information    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>Boards</b>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Main Computing Unit   </td><td class="markdownTableBodyNone">Raspberry Pi 4 Model B   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">front/center   </td><td class="markdownTableBodyNone"><a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">https://www.raspberrypi.com/products/raspberry-pi-4-model-b/</a>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Graphics Processing Unit (GPU)   </td><td class="markdownTableBodyNone">Nvidia Jetson TX2   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">center   </td><td class="markdownTableBodyNone"><a href="https://www.nvidia.com/de-de/autonomous-machines/embedded-systems/jetson-tx2/">https://www.nvidia.com/de-de/autonomous-machines/embedded-systems/jetson-tx2/</a>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Carrier Board   </td><td class="markdownTableBodyNone">Nvidia Carrier Board J120   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">center   </td><td class="markdownTableBodyNone"><a href="https://auvidea.eu/j120/">https://auvidea.eu/j120/</a>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Microcontroller   </td><td class="markdownTableBodyNone">STM Nucleo F401RE   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">rear   </td><td class="markdownTableBodyNone"><a href="https://www.st.com/en/evaluation-tools/nucleo-f401re.html">https://www.st.com/en/evaluation-tools/nucleo-f401re.html</a>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>Sensors</b>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Stereo RGB camera   </td><td class="markdownTableBodyNone">Intel RealSense D435   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">front   </td><td class="markdownTableBodyNone"><a href="https://www.intelrealsense.com/depth-camera-d435/">https://www.intelrealsense.com/depth-camera-d435/</a>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Wheelspeed Sensor   </td><td class="markdownTableBodyNone">QTR-1A Reflectance Sensor   </td><td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">front left &amp; right   </td><td class="markdownTableBodyNone"><a href="https://www.pololu.com/product/2458">https://www.pololu.com/product/2458</a>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Inertial measuring unit (IMU)   </td><td class="markdownTableBodyNone">Bosch BNO055   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">center   </td><td class="markdownTableBodyNone"><a href="https://www.bosch-sensortec.com/products/smart-sensors/bno055/">https://www.bosch-sensortec.com/products/smart-sensors/bno055/</a>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Motor Encoder   </td><td class="markdownTableBodyNone">CUI AMT103   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">center   </td><td class="markdownTableBodyNone"><a href="https://www.cuidevices.com/product/motion-and-control/rotary-encoders/incremental/modular/amt10-series">https://www.cuidevices.com/product/motion-and-control/rotary-encoders/incremental/modular/amt10-series</a>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>Actuators</b>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Motor   </td><td class="markdownTableBodyNone">Reely MT550 Model ship brushed motor   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">rear   </td><td class="markdownTableBodyNone"><a href="https://www.conrad.com/p/reely-mt550-model-ship-brushed-motor-396208">https://www.conrad.com/p/reely-mt550-model-ship-brushed-motor-396208</a>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Motor Driver (H-Bridge)   </td><td class="markdownTableBodyNone">VNH5019 Motor Driver Carrier   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">center   </td><td class="markdownTableBodyNone"><a href="https://www.pololu.com/product/1451">https://www.pololu.com/product/1451</a>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Steering Servo   </td><td class="markdownTableBodyNone">Reely Servo RS-610WP   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">front axle   </td><td class="markdownTableBodyNone"><a href="https://www.conrad.com/p/reely-standard-servo-rs-610wp-mg-analogue-servo-gear-box-material-metal-connector-system-jr-2141322">https://www.conrad.com/p/reely-standard-servo-rs-610wp-mg-analogue-servo-gear-box-material-metal-connector-system-jr-2141322</a>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>Others</b>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Chassis   </td><td class="markdownTableBodyNone">Reely TC-04 Onroad-Chassis   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone"><a href="https://asset.conrad.com/media10/add/160267/c1/-/gl/001406735ML02/manual-1406735-reely-tc-04-onroad-chassis-110-rc-model-car-electric-road-version-4wd-arr.pdf">https://asset.conrad.com/media10/add/160267/c1/-/gl/001406735ML02/manual-1406735-reely-tc-04-onroad-chassis-110-rc-model-car-electric-road-version-4wd-arr.pdf</a>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Wheels   </td><td class="markdownTableBodyNone">Matrix MX10-SpecH   </td><td class="markdownTableBodyNone">4   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone"><a href="https://www.rc-kleinkram.de/products/19-mx10-spech">https://www.rc-kleinkram.de/products/19-mx10-spech</a>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Battery   </td><td class="markdownTableBodyNone">Hacker TopFuel LiPo 20C ECO-X 3800mAh 3S   </td><td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">center   </td><td class="markdownTableBodyNone"><a href="https://www.scm-modellbau.com/Hacker-TopFuel-LiPo-20C-ECO-X-3800mAh-3S-MTAG">https://www.scm-modellbau.com/Hacker-TopFuel-LiPo-20C-ECO-X-3800mAh-3S-MTAG</a>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Voltage Transformer   </td><td class="markdownTableBodyNone">muRata OKR-T/10-W12-C   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">center   </td><td class="markdownTableBodyNone"><a href="https://www.murata.com/en-us/products/productdetail?partno=OKR-T%2F10-W12-C">https://www.murata.com/en-us/products/productdetail?partno=OKR-T%2F10-W12-C</a>   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md3"></a>
+ROS architecture</h1>
+<p><img src="ros_topics_overview.png" alt="" class="inline" title="Overview ROS Topics)"/> <em>Overview about the current ROS architecutre</em> </p>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Custom messages</h2>
+<p>Further information about the custom messages, e.g. the physical values of the messages that are referenced below with the prefix <code>bfmc_interface</code>, can be found <a href="Pi_Platform/src/bfmc_interface/msg">here</a>. </p>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Input topics</h2>
+<p>During real world application, input is provided by the sensors on the vehicle (camera, IMU, wheel speed sensor), V2X communication (traffic lights) from the servers on the race track, and an <code>/input/remote_state_control</code> which can be used to manually send a desired state to the vehicle. </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Topic   </th><th class="markdownTableHeadNone">Msg-Type   </th><th class="markdownTableHeadNone">Publisher   </th><th class="markdownTableHeadNone">Subscriber    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>/input/camera/lane_detection</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::LaneDetection</code>   </td><td class="markdownTableBodyNone"><code>bfmc_input/src/camera_perception/camera_listener_node.cpp</code> <br  />
+ <code><a class="el" href="camera__perception__node_8cpp.html" title="This file implements the ROS node for the perception of the vehicle implemented in ROS.">bfmc_input/src/camera_perception/camera_perception_node.cpp</a></code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="_environment_8cpp.html" title="This file implements the Environment class used in the BFMC 2023.">bfmc_action/src/planner/Environment.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>/input/camera/sign_detection</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::SignDetection</code>   </td><td class="markdownTableBodyNone"><code>bfmc_input/src/camera_perception/camera_listener_node.cpp</code> <br  />
+ <code><a class="el" href="camera__perception__node_8cpp.html" title="This file implements the ROS node for the perception of the vehicle implemented in ROS.">bfmc_input/src/camera_perception/camera_perception_node.cpp</a></code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="_environment_8cpp.html" title="This file implements the Environment class used in the BFMC 2023.">bfmc_action/src/planner/Environment.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>/input/imu</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::IMU</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="imu__node_8py.html" title="This file implements the logic to process the data from the IMU of the vehicle or the simulated IMU o...">bfmc_input/scripts/imu/imu_node.py</a></code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="_environment_8cpp.html" title="This file implements the Environment class used in the BFMC 2023.">bfmc_action/src/planner/Environment.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>/input/environment/traffic_light/start</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::TrafficLight</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="traffic__light__node_8py.html" title="This file implements the logic for processing the data received by the environmental server concernin...">bfmc_input/scripts/traffic_light/traffic_light_node.py</a></code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="_environment_8cpp.html" title="This file implements the Environment class used in the BFMC 2023.">bfmc_action/src/planner/Environment.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>/input/environment/traffic_light/east</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::TrafficLight</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="traffic__light__node_8py.html" title="This file implements the logic for processing the data received by the environmental server concernin...">bfmc_input/scripts/traffic_light/traffic_light_node.py</a></code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="_environment_8cpp.html" title="This file implements the Environment class used in the BFMC 2023.">bfmc_action/src/planner/Environment.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>/input/environment/traffic_light/south</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::TrafficLight</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="traffic__light__node_8py.html" title="This file implements the logic for processing the data received by the environmental server concernin...">bfmc_input/scripts/traffic_light/traffic_light_node.py</a></code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="_environment_8cpp.html" title="This file implements the Environment class used in the BFMC 2023.">bfmc_action/src/planner/Environment.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>/input/environment/traffic_light/west</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::TrafficLight</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="traffic__light__node_8py.html" title="This file implements the logic for processing the data received by the environmental server concernin...">bfmc_input/scripts/traffic_light/traffic_light_node.py</a></code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="_environment_8cpp.html" title="This file implements the Environment class used in the BFMC 2023.">bfmc_action/src/planner/Environment.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>/input/wheel_speed</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::WheelSpeed</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="wheel__speed__node_8cpp.html" title="This file implements the logi to handle the wheelspeed sensor data.">bfmc_input/src/wheel_speed/wheel_speed_node.cpp</a></code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="_environment_8cpp.html" title="This file implements the Environment class used in the BFMC 2023.">bfmc_action/src/planner/Environment.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>/input/remote_state_control</code>   </td><td class="markdownTableBodyNone"><code>std_msgs::UInt8</code>   </td><td class="markdownTableBodyNone">None - Manually publish desired state while testing   </td><td class="markdownTableBodyNone"><code><a class="el" href="_environment_8cpp.html" title="This file implements the Environment class used in the BFMC 2023.">bfmc_action/src/planner/Environment.cpp</a></code>   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Simulator topics</h2>
+<p>During simulator application, input is provided by the simulator (camera, imu, wheelspeed, gps) and the ground truth of the ego pose is published to validate your algorithms. </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Topic   </th><th class="markdownTableHeadNone">Msg-Type   </th><th class="markdownTableHeadNone">Publisher   </th><th class="markdownTableHeadNone">Subscriber    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>/simulator/camera</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::SimulatedCamera</code>   </td><td class="markdownTableBodyNone">simulator   </td><td class="markdownTableBodyNone"><code><a class="el" href="_camera_8cpp.html" title="This file implements the main process for the perception of the vehicle.">bfmc_input/src/camera_perception/Camera.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>/simulator/imu</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::SimulatedIMU</code>   </td><td class="markdownTableBodyNone">simulator   </td><td class="markdownTableBodyNone"><code><a class="el" href="imu__node_8py.html" title="This file implements the logic to process the data from the IMU of the vehicle or the simulated IMU o...">bfmc_input/scripts/imu/imu_node.py</a></code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>/simulator/wheel_speed</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::SimulatedWheelSpeed</code>   </td><td class="markdownTableBodyNone">simulator   </td><td class="markdownTableBodyNone"><code><a class="el" href="wheel__speed__node_8cpp.html" title="This file implements the logi to handle the wheelspeed sensor data.">bfmc_input/src/wheel_speed/wheel_speed_node.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>/simulator/gps</code>   </td><td class="markdownTableBodyNone"><code>geometry_msgs/PointStamped</code>   </td><td class="markdownTableBodyNone">simulator   </td><td class="markdownTableBodyNone">TBD    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>/simulator/ego_pose_ground_truth</code>   </td><td class="markdownTableBodyNone"><code>geometry_msgs/PoseStamped</code>   </td><td class="markdownTableBodyNone">simulator   </td><td class="markdownTableBodyNone">None   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Output topics</h2>
+<p>The output contains steering and speed commands sent to the Nucleo board via UART - also see <a href="#car-setup">hardware setup</a>. Furthermore, the calculated localization information (x, y, yaw, nodeID) is published and stored in ROS bags for later analysis. And additionally, the vehicle shall send detected characters and objects to an environment server (live traffic) (currently not implemented). </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Topic   </th><th class="markdownTableHeadNone">Msg-Type   </th><th class="markdownTableHeadNone">Publisher   </th><th class="markdownTableHeadNone">Subscriber    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>/output/actuator_command</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::NucleoCommand</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="_command_8cpp.html" title="This file implements the output commands used in the BFMC 2023.">bfmc_action/src/planner/Command.cpp</a></code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="serial__handler__node_8cpp.html" title="This file holds the logic for converting the ROS command messages to messages that can be sent to the...">bfmc_output/src/serial_handler/serial_handler_node.cpp</a></code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>/output/ego_pose</code>   </td><td class="markdownTableBodyNone"><code>bfmc_interface::EgoPose</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="_environment_8cpp.html" title="This file implements the Environment class used in the BFMC 2023.">bfmc_action/src/planner/Environment.cpp</a></code>   </td><td class="markdownTableBodyNone">None   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Launchfiles</h2>
+<p>Each catkin package (except <code>bfmc_interface</code>) contains a launch file to launch all its nodes. These nodes include (depending on the specific package) <code>imu</code>, <code>wheel_speed</code>, <code>camera_perception_listener</code>, <code>serial_handler</code>, and <code>planner</code>. The <code>planner</code> node has several parameters that can be set, such as the start state, the distance to travel, the default speed, the reduced speed, the parking speed, the highway speed, the current node ID, the destination node ID, the initial car pose and the timings for different scenarios. The main launch file to start all relevant car nodes is located inside the <code>bfmc_interface</code> package at <code>Pi_Platform/src/bfmc_interface/launch/run_car_autonomous.launch</code>. If you are using the simulator, use the provided <code>Pi_Platform/src/bfmc_interface/launch/run_car_simulated.launch</code></p>
+<p>There are additional launch files which are stored in Pi_Platform/src/bfmc_interface/launch/tests to test individual scenarios.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Parameter   </th><th class="markdownTableHeadNone">Unit   </th><th class="markdownTableHeadNone">Datatype   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>startState</code>   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone"><code>int</code>   </td><td class="markdownTableBodyNone">Desired state for starting the vehicle    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>distanceToDrive</code>   </td><td class="markdownTableBodyNone">[m]   </td><td class="markdownTableBodyNone"><code>float</code>   </td><td class="markdownTableBodyNone">Distance when the vehicle enters the finish state    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>speedDefault</code>   </td><td class="markdownTableBodyNone">[m/s]   </td><td class="markdownTableBodyNone"><code>float</code>   </td><td class="markdownTableBodyNone">Default speed for driving    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>speedReduced</code>   </td><td class="markdownTableBodyNone">[m/s]   </td><td class="markdownTableBodyNone"><code>float</code>   </td><td class="markdownTableBodyNone">Reduced speed e.g. when approaching intersections, crosswalks    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>speedParking</code>   </td><td class="markdownTableBodyNone">[m/s]   </td><td class="markdownTableBodyNone"><code>float</code>   </td><td class="markdownTableBodyNone">speed for parking maneuver    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>speedHighWay</code>   </td><td class="markdownTableBodyNone">[m/s]   </td><td class="markdownTableBodyNone"><code>float</code>   </td><td class="markdownTableBodyNone">Increased speed when driving on the highway    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>currentNodeID</code>   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone"><code>int</code>   </td><td class="markdownTableBodyNone">Starting point (ID) for planning the route    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>currentNodeID</code>   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone"><code>int</code>   </td><td class="markdownTableBodyNone">End point (ID) for planning the route    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>timings/startUp</code>   </td><td class="markdownTableBodyNone">[s]   </td><td class="markdownTableBodyNone"><code>double</code>   </td><td class="markdownTableBodyNone">Duration of the boot process of the vehicle    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>timings/stop</code>   </td><td class="markdownTableBodyNone">[s]   </td><td class="markdownTableBodyNone"><code>double</code>   </td><td class="markdownTableBodyNone">Duration of the vehicle stop at stop signs    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>timings/pedestrian</code>   </td><td class="markdownTableBodyNone">[s]   </td><td class="markdownTableBodyNone"><code>double</code>   </td><td class="markdownTableBodyNone">Maximum duration of stopping a vehicle when a pedestrian is detected on the road/crosswalk    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>initialPoseX</code>   </td><td class="markdownTableBodyNone">[m]   </td><td class="markdownTableBodyNone"><code>float</code>   </td><td class="markdownTableBodyNone">Initial x coordinate of the vehicle on the map    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>initialPoseY</code>   </td><td class="markdownTableBodyNone">[m]   </td><td class="markdownTableBodyNone"><code>float</code>   </td><td class="markdownTableBodyNone">Initial y coordinate of the vehicle on the map    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>initialPoseYaw</code>   </td><td class="markdownTableBodyNone">[rad]   </td><td class="markdownTableBodyNone"><code>float</code>   </td><td class="markdownTableBodyNone">Initial yaw orientation of the vehicle (default - 270° vehicle faces north)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Unused   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>raceMode</code>   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone"><code>bool</code>   </td><td class="markdownTableBodyNone">Set raceMode   </td></tr>
+</table>
+<p>As options for the parameter <code>startState</code> the implemented states of the vehicle are available, which are mapped as follows: </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">State name   </th><th class="markdownTableHeadNone">State ID    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>START_UP</code>   </td><td class="markdownTableBodyNone">0    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>FOLLOW_LANE</code>   </td><td class="markdownTableBodyNone">1    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>INTERSECTION</code>   </td><td class="markdownTableBodyNone">2    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>STOP</code>   </td><td class="markdownTableBodyNone">3    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>CROSSWALK</code>   </td><td class="markdownTableBodyNone">4    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>PARKING</code>   </td><td class="markdownTableBodyNone">5    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>ROUTE_PLANNING</code>   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>PRIORITY_ROAD</code>   </td><td class="markdownTableBodyNone">7    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>PEDESTRIAN</code>   </td><td class="markdownTableBodyNone">8    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SINGLE_ONE_WAY</code>   </td><td class="markdownTableBodyNone">9    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>CHANGE</code>   </td><td class="markdownTableBodyNone">10    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>TRAFFIC_LIGHT</code>   </td><td class="markdownTableBodyNone">11    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>ROUNDABOUT</code>   </td><td class="markdownTableBodyNone">12    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>FINISH</code>   </td><td class="markdownTableBodyNone">31   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md9"></a>
+Software which needs to be flashed onto the vehicle and how to start the vehicle</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Software   </th><th class="markdownTableHeadNone">Sourcecode   </th><th class="markdownTableHeadNone">Information    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Embedded Platform - Nucleo   </td><td class="markdownTableBodyNone">Nucleo_Platform   </td><td class="markdownTableBodyNone">Copy Nucleo_Platform/BUILD/Nucleo_mbedrobot.bin to Nucleo-Board via USB - further information: <a href="https://boschfuturemobility.com/embedded/">https://boschfuturemobility.com/embedded/</a>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">TX2 Platform - Nvidia TX2   </td><td class="markdownTableBodyNone">Jetson_Platform/perception   </td><td class="markdownTableBodyNone">Build code on Nvidia TX2 Jetson and run <code>./perception_process</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ROS - Raspberry Pi   </td><td class="markdownTableBodyNone">Pi_Platform   </td><td class="markdownTableBodyNone">Build code on Raspberry Pi and run <code>roslaunch run_car_autonomous.launch</code>   </td></tr>
+</table>
+<p>Build the software on the Nvidia Jetson TX2: </p><div class="fragment"><div class="line">cd Jetson_Platform/perception</div>
+<div class="line">mkdir build &amp;&amp; cd build</div>
+<div class="line">cmake ..</div>
+<div class="line">make -j4 (Check how many cpu cores your system has available with nproc - the Nvidia Jetson TX2 has 4 cores)</div>
+</div><!-- fragment --><p> Build the ROS software on the Raspberry Pi: </p><div class="fragment"><div class="line">catkin clean -y   (optional)</div>
+<div class="line">catkin build</div>
+<div class="line">source devel/setup.bash</div>
+</div><!-- fragment --><p>Start up the vehicle: <b>Caution</b>: Process on TX2 Platform needs to be running before starting the ROS launch file otherwise the lane/object detection will not send any data to the Raspberry Pi. </p><div class="fragment"><div class="line">./perception_process                                (Nvidia Jetson TX2 - Jetson_Platform/perception/build)</div>
+<div class="line">roslaunch bfmc_interface run_car_autonomous.launch  (Raspberry Pi - Pi_Platform)</div>
+</div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

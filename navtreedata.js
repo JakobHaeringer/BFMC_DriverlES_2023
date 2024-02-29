@@ -25,6 +25,18 @@
 var NAVTREE =
 [
   [ "Raspberry Pi Platform", "index.html", [
+    [ "BFMC DriverlES 2023", "index.html", [
+      [ "What are the main capabilities this repository offers?", "index.html#autotoc_md1", null ],
+      [ "Car setup", "index.html#autotoc_md2", null ],
+      [ "ROS architecture", "index.html#autotoc_md3", [
+        [ "Custom messages", "index.html#autotoc_md4", null ],
+        [ "Input topics", "index.html#autotoc_md5", null ],
+        [ "Simulator topics", "index.html#autotoc_md6", null ],
+        [ "Output topics", "index.html#autotoc_md7", null ],
+        [ "Launchfiles", "index.html#autotoc_md8", null ]
+      ] ],
+      [ "Software which needs to be flashed onto the vehicle and how to start the vehicle", "index.html#autotoc_md9", null ]
+    ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -60,10 +72,10 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"",
-"class_i_t_m_o_v_e_s_1_1_actions.html#a8e71816321d21333ecbb8bcbf2c5d46c",
-"functions_vars.html",
-"struct_detection_r_o_i.html#a1611ff9f77fc83d322d381af5c5f5680"
+"_a_star_8cpp.html",
+"class_i_t_m_o_v_e_s_1_1_actions.html#ab42a668de7aef4368867ae66c884c18e",
+"functions_y.html",
+"struct_detection.html#a82eaa271bbb9ae9cca52ded000f41406"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
